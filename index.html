@@ -3,504 +3,240 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Faculty Homepage | HappyGamerGoose</title>
-  <style>
-    :root {
-      --primary: #0f2e28;
-      --primary-light: #1b4d43;
-      --accent: #ff6b6b;
-      --accent-glow: rgba(255, 107, 107, 0.2);
-      --bg: #f8faf9;
-      --surface: #ffffff;
-      --text: #1e293b;
-      --text-muted: #64748b;
-      --border: #e2e8f0;
-      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
-      --radius: 12px;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      background-color: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-    }
-
-    header {
-      background-color: var(--primary);
-      color: #ffffff;
-      padding: 1rem 1.5rem;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    }
-
-    .nav-container {
-      max-width: 1000px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .logo {
-      font-size: 1.15rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .pulse-dot {
-      width: 10px;
-      height: 10px;
-      background-color: var(--accent);
-      border-radius: 50%;
-      box-shadow: 0 0 8px var(--accent);
-      animation: pulse 2s infinite ease-in-out;
-    }
-
-    @keyframes pulse {
-      0%, 100% { transform: scale(0.9); opacity: 0.8; }
-      50% { transform: scale(1.3); opacity: 1; }
-    }
-
-    nav ul {
-      display: flex;
-      list-style: none;
-      gap: 1.25rem;
-    }
-
-    nav a {
-      color: #cbd5e1;
-      text-decoration: none;
-      font-size: 0.95rem;
-      font-weight: 500;
-      transition: color 0.2s ease;
-    }
-
-    nav a:hover {
-      color: #ffffff;
-    }
-
-    .hero {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-      color: #ffffff;
-      padding: 3.5rem 1.5rem 4rem;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-container {
-      max-width: 1000px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      gap: 2.5rem;
-      position: relative;
-      z-index: 2;
-    }
-
-    .avatar-wrapper {
-      position: relative;
-      flex-shrink: 0;
-    }
-
-    .avatar {
-      width: 130px;
-      height: 130px;
-      border-radius: 50%;
-      background: #ffffff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--primary);
-      font-size: 2.8rem;
-      font-weight: 800;
-      border: 4px solid rgba(255, 255, 255, 0.2);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-    }
-
-    .hero-info h1 {
-      font-size: 2.2rem;
-      font-weight: 800;
-      line-height: 1.2;
-      margin-bottom: 0.35rem;
-    }
-
-    .hero-info .title {
-      font-size: 1.15rem;
-      color: #a7f3d0;
-      font-weight: 600;
-      margin-bottom: 0.25rem;
-    }
-
-    .hero-info .dept {
-      color: #cbd5e1;
-      font-size: 0.95rem;
-      margin-bottom: 1rem;
-    }
-
-    .hero-badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-top: 0.75rem;
-    }
-
-    .badge {
-      background: rgba(255, 255, 255, 0.12);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      padding: 0.3rem 0.75rem;
-      border-radius: 9999px;
-      font-size: 0.82rem;
-      color: #f1f5f9;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    .ekg-strip {
-      background-color: var(--surface);
-      border-bottom: 1px solid var(--border);
-      padding: 0.5rem 0;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .ekg-svg {
-      width: 100%;
-      max-width: 600px;
-      height: 40px;
-    }
-
-    main {
-      max-width: 1000px;
-      margin: 2rem auto;
-      padding: 0 1.5rem;
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 2rem;
-    }
-
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.5rem;
-      margin-bottom: 1.75rem;
-      box-shadow: var(--card-shadow);
-    }
-
-    .card h2 {
-      font-size: 1.35rem;
-      color: var(--primary);
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      border-bottom: 2px solid #eef2f6;
-      padding-bottom: 0.5rem;
-    }
-
-    .card p {
-      color: #334155;
-      margin-bottom: 0.75rem;
-    }
-
-    .course-item {
-      padding: 0.85rem 0;
-      border-bottom: 1px dashed var(--border);
-    }
-
-    .course-item:last-child {
-      border-bottom: none;
-    }
-
-    .course-code {
-      font-weight: 700;
-      color: var(--primary);
-    }
-
-    .course-title {
-      font-weight: 500;
-      color: var(--text);
-    }
-
-    .course-term {
-      font-size: 0.82rem;
-      color: var(--text-muted);
-    }
-
-    .interests-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-
-    .interest-pill {
-      background: #f0fdf4;
-      border: 1px solid #bbf7d0;
-      border-radius: 8px;
-      padding: 0.75rem 1rem;
-      font-weight: 500;
-      color: #166534;
-      font-size: 0.9rem;
-    }
-
-    .pub-item {
-      margin-bottom: 1rem;
-      font-size: 0.92rem;
-    }
-
-    .pub-title {
-      font-weight: 600;
-      color: #0f172a;
-    }
-
-    .pub-meta {
-      color: var(--text-muted);
-      font-size: 0.85rem;
-    }
-
-    .info-list {
-      list-style: none;
-    }
-
-    .info-list li {
-      margin-bottom: 0.85rem;
-      font-size: 0.92rem;
-    }
-
-    .info-label {
-      font-weight: 600;
-      color: var(--primary);
-      display: block;
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
-
-    .btn {
-      display: inline-block;
-      width: 100%;
-      text-align: center;
-      background: var(--primary);
-      color: #ffffff;
-      padding: 0.75rem 1rem;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 0.92rem;
-      transition: background-color 0.2s ease;
-      margin-top: 0.5rem;
-    }
-
-    .btn:hover {
-      background: var(--primary-light);
-    }
-
-    footer {
-      text-align: center;
-      padding: 2.5rem 1rem;
-      background: #e2e8f0;
-      color: var(--text-muted);
-      font-size: 0.85rem;
-      margin-top: 3rem;
-    }
-
-    footer a {
-      color: var(--primary);
-      text-decoration: underline;
-    }
-
-    @media (max-width: 768px) {
-      main {
-        grid-template-columns: 1fr;
-      }
-      .hero-container {
-        flex-direction: column;
-        text-align: center;
-      }
-      .hero-badges {
-        justify-content: center;
-      }
-    }
-  </style>
+  <meta name="description" content="Personal Profile Webpage of HappyGamerGoose - B.Tech IT Student at MIT Manipal, AI enthusiast, and gamer." />
+  <title>HappyGamerGoose | Personal Profile</title>
+  
+  <!-- External CSS Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- Top Navigation -->
+  <!-- Navigation Bar -->
   <header>
-    <div class="nav-container">
-      <div class="logo">
-        <span class="pulse-dot"></span>
-        <span>Nursing Faculty Profile</span>
-      </div>
-      <nav>
+    <div class="container nav-wrap">
+      <a href="#" class="brand-logo">
+        <div class="logo-badge">🪿</div>
+        <span>HappyGamerGoose</span>
+      </a>
+      <nav aria-label="Main Navigation">
         <ul>
           <li><a href="#about">About</a></li>
-          <li><a href="#teaching">Teaching</a></li>
-          <li><a href="#research">Research</a></li>
-          <li><a href="#publications">Publications</a></li>
+          <li><a href="#education">Education</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#interests">Interests</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <!-- Hero Header -->
-  <section class="hero">
-    <div class="hero-container">
-      <div class="avatar-wrapper">
-        <div class="avatar">HG</div>
-      </div>
-      <div class="hero-info">
-        <!-- Replace with your actual name and credentials -->
-        <h1>HappyGamerGoose, PhD, RN, CNE</h1>
-        <div class="title">Assistant Professor of Nursing</div>
-        <div class="dept">School of Nursing & Health Sciences</div>
+  <main class="container">
+
+    <!-- Hero Section: Profile Photo, Name, and Introduction -->
+    <section class="hero-section" id="intro">
+      <div class="hero-card">
+        <div class="photo-wrapper">
+          <img src="profile.jpg" alt="Profile photograph of HappyGamerGoose" class="profile-img" />
+          <span class="online-status" title="Status: Online & Coding"></span>
+        </div>
         
-        <div class="hero-badges">
-          <span class="badge">🩺 Clinical Simulation</span>
-          <span class="badge">🏥 Patient Safety</span>
-          <span class="badge">📚 Nursing Pedagogy</span>
-          <span class="badge">🌐 happygamergoose.github.io</span>
+        <div class="hero-content">
+          <span class="tagline-badge">🎓 Undergraduate Student</span>
+          <h1>HappyGamerGoose</h1>
+          <p class="hero-subtitle">B.Tech in Information Technology &bull; MIT Manipal ('28)</p>
+          <p class="hero-bio-short">
+            3rd-year engineering student passionate about Artificial Intelligence, cutting-edge prompt engineering, and building open-source tech.
+          </p>
+          
+          <div class="hero-actions">
+            <a href="https://github.com/HappyGamerGoose" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+              </svg>
+              GitHub Profile
+            </a>
+            <a href="#contact" class="btn btn-outline">Get in Touch</a>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- EKG Heartbeat Graphic -->
-  <div class="ekg-strip">
-    <svg class="ekg-svg" viewBox="0 0 600 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,25 L180,25 L195,10 L205,40 L215,5 L225,45 L235,25 L380,25 L395,10 L405,40 L415,5 L425,45 L435,25 L600,25" 
-            stroke="#ff6b6b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-  </div>
-
-  <!-- Main Grid Layout -->
-  <main>
-    <div class="content-column">
-
-      <!-- About Section -->
-      <section id="about" class="card">
+    <!-- About Me Section -->
+    <section id="about">
+      <div class="section-header">
         <h2>About Me</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="card about-card">
         <p>
-          Welcome to my academic homepage. I am a nursing educator and researcher dedicated to preparing the next generation of compassionate, evidence-based healthcare professionals.
+          Hello! I am a <span class="highlight">3rd-year undergraduate student</span> pursuing my <span class="highlight">Bachelor of Technology (B.Tech) in Information Technology</span> at <span class="highlight">Manipal Institute of Technology (MIT), Manipal</span>, graduating with the <span class="highlight">Batch of 2028</span>.
         </p>
         <p>
-          My clinical background spans acute adult care and critical care simulation. My teaching focuses on clinical decision-making, patient advocacy, and integrating emerging healthcare technologies into clinical workflows.
+          I am deeply fascinated by the rapid evolution of <span class="highlight">Artificial Intelligence</span> and modern computational technologies. My current focus centers on mastering <span class="highlight">Prompt Engineering</span>, exploring the inner workings of Large Language Models (LLMs), and finding creative ways to leverage AI to automate complex workflows and build helpful applications.
         </p>
-      </section>
-
-      <!-- Research Section -->
-      <section id="research" class="card">
-        <h2>Research & Scholarship</h2>
         <p>
-          My research program examines high-fidelity simulation in nursing education, student clinical confidence, and interprofessional patient safety communication.
+          When I am not experimenting with AI prompts or studying coursework, you will find me gaming, checking out open-source repositories on GitHub, or exploring new developer tools.
         </p>
-        <div class="interests-grid">
-          <div class="interest-pill">High-Fidelity Clinical Simulation</div>
-          <div class="interest-pill">Patient Safety & Human Factors</div>
-          <div class="interest-pill">Curriculum & Competency Design</div>
-          <div class="interest-pill">Healthcare Informatics</div>
+      </div>
+    </section>
+
+    <!-- Educational & Professional Information Section -->
+    <section id="education">
+      <div class="section-header">
+        <h2>Education & Background</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="card">
+        <div class="edu-timeline">
+          
+          <div class="edu-item">
+            <div class="edu-icon-box">🏛️</div>
+            <div class="edu-details">
+              <h3>Bachelor of Technology (B.Tech) in Information Technology</h3>
+              <div class="edu-institution">Manipal Institute of Technology (MIT Manipal)</div>
+              <div class="edu-meta">
+                <span>📅 2024 &ndash; 2028 (3rd Year Student)</span>
+                <span>📍 Manipal, Karnataka, India</span>
+              </div>
+              <p class="edu-desc">
+                Core coursework encompasses algorithms, software engineering principles, computer networks, database systems, and modern information technology infrastructure.
+              </p>
+            </div>
+          </div>
+
+          <div class="edu-item">
+            <div class="edu-icon-box">💼</div>
+            <div class="edu-details">
+              <h3>Professional Experience & Projects</h3>
+              <div class="edu-institution">Hands-On Independent Development</div>
+              <div class="edu-meta">
+                <span>🚀 Active Focus</span>
+              </div>
+              <p class="edu-desc">
+                Currently focusing on academic projects, personal technical skill-building, open-source explorations, and deep hands-on experimentation with generative AI prompting.
+              </p>
+            </div>
+          </div>
+
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- Teaching Section -->
-      <section id="teaching" class="card">
-        <h2>Teaching & Courses</h2>
-        <div class="course-item">
-          <div class="course-code">NUR 301</div>
-          <div class="course-title">Foundations of Nursing Practice & Clinical Skills</div>
-          <div class="course-term">Fall Semester &bull; Undergraduate</div>
+    <!-- Skills Section -->
+    <section id="skills">
+      <div class="section-header">
+        <h2>Skills & Expertise</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="skills-grid">
+        
+        <!-- Technical Skills -->
+        <div class="card skill-category">
+          <h3>⚡ Core Technical Skills</h3>
+          <div class="skill-tags">
+            <span class="skill-tag featured">✨ Prompt Engineering</span>
+            <span class="skill-tag">🤖 Generative AI & LLMs</span>
+            <span class="skill-tag">🐍 Python Programming</span>
+            <span class="skill-tag">🌐 HTML5 & Modern CSS3</span>
+            <span class="skill-tag">🌿 Git & GitHub Version Control</span>
+            <span class="skill-tag">💻 IT Infrastructure Basics</span>
+          </div>
         </div>
-        <div class="course-item">
-          <div class="course-code">NUR 420</div>
-          <div class="course-title">Advanced Adult Health & Clinical Simulation Lab</div>
-          <div class="course-term">Spring Semester &bull; Senior Practicum</div>
+
+        <!-- Methodologies & Soft Skills -->
+        <div class="card skill-category">
+          <h3>🎯 Core Competencies</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">🔍 AI Context Optimization</span>
+            <span class="skill-tag">🧩 Logical Problem Solving</span>
+            <span class="skill-tag">📖 Continuous Self-Learning</span>
+            <span class="skill-tag">🤝 Open-Source Collaboration</span>
+            <span class="skill-tag">📊 Analytical Thinking</span>
+            <span class="skill-tag">📝 Technical Documentation</span>
+          </div>
         </div>
-        <div class="course-item">
-          <div class="course-code">NUR 515</div>
-          <div class="course-title">Evidence-Based Practice & Quality Improvement</div>
-          <div class="course-term">Graduate Seminar &bull; Hybrid</div>
+
+      </div>
+    </section>
+
+    <!-- Interests & Hobbies Section -->
+    <section id="interests">
+      <div class="section-header">
+        <h2>Interests & Hobbies</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="interests-grid">
+        
+        <div class="interest-card">
+          <div class="interest-icon">🎮</div>
+          <div class="interest-content">
+            <h3>Gaming</h3>
+            <p>Passionate gamer exploring immersive PC gaming titles, multiplayer strategies, and gaming hardware setups.</p>
+          </div>
         </div>
-      </section>
 
-      <!-- Publications Section -->
-      <section id="publications" class="card">
-        <h2>Selected Publications</h2>
-        <div class="pub-item">
-          <div class="pub-title">"Optimizing Debriefing Models in High-Fidelity Nursing Simulation: A Multi-Site Trial"</div>
-          <div class="pub-meta">Journal of Nursing Education, 2025.</div>
+        <div class="interest-card">
+          <div class="interest-icon">🌐</div>
+          <div class="interest-content">
+            <h3>Open-Source Contributions</h3>
+            <p>Collaborating with developer communities, exploring open-source projects, and sharing code on GitHub.</p>
+          </div>
         </div>
-        <div class="pub-item">
-          <div class="pub-title">"Fostering Critical Thinking and Clinical Judgement through Scaffolded Virtual Case Studies"</div>
-          <div class="pub-meta">Nurse Educator, 2024.</div>
+
+        <div class="interest-card">
+          <div class="interest-icon">🤖</div>
+          <div class="interest-content">
+            <h3>Artificial Intelligence</h3>
+            <p>Experimenting with frontier AI models, prompt engineering patterns, autonomous agents, and AI tools.</p>
+          </div>
         </div>
-      </section>
 
-    </div>
+      </div>
+    </section>
 
-    <!-- Sidebar Column -->
-    <aside class="sidebar-column">
+    <!-- Contact Details & Social Links Section -->
+    <section id="contact">
+      <div class="section-header">
+        <h2>Get in Touch</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="contact-grid">
+        
+        <!-- GitHub Link Card -->
+        <a href="https://github.com/HappyGamerGoose" target="_blank" rel="noopener noreferrer" class="card contact-card">
+          <div class="contact-icon-box">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+            </svg>
+          </div>
+          <div class="contact-info-text">
+            <h3>GitHub</h3>
+            <p>github.com/HappyGamerGoose</p>
+          </div>
+        </a>
 
-      <!-- Contact Info Card -->
-      <section id="contact" class="card">
-        <h2>Office & Contact</h2>
-        <ul class="info-list">
-          <li>
-            <span class="info-label">Office</span>
-            Health Sciences Complex, Room 314
-          </li>
-          <li>
-            <span class="info-label">Office Hours</span>
-            Tues & Thurs: 2:00 PM – 4:30 PM<br/>
-            (Or by appointment)
-          </li>
-          <li>
-            <span class="info-label">Email</span>
-            <a href="mailto:faculty@university.edu" style="color: var(--primary);">faculty@university.edu</a>
-          </li>
-          <li>
-            <span class="info-label">Website</span>
-            <a href="https://happygamergoose.github.io" target="_blank" style="color: var(--primary);">happygamergoose.github.io</a>
-          </li>
-        </ul>
-        <a href="mailto:faculty@university.edu" class="btn">Send an Email</a>
-      </section>
+        <!-- Email Contact Card -->
+        <a href="mailto:206229530+HappyGamerGoose@users.noreply.github.com" class="card contact-card">
+          <div class="contact-icon-box">✉️</div>
+          <div class="contact-info-text">
+            <h3>Email</h3>
+            <p>206229530+HappyGamerGoose@users.noreply.github.com</p>
+          </div>
+        </a>
 
-      <!-- Student Resources Card -->
-      <section class="card">
-        <h2>Student Resources</h2>
-        <ul class="info-list">
-          <li>📄 <a href="#syllabus" style="color: var(--primary);">Course Syllabi & Guides</a></li>
-          <li>📅 <a href="#office-hours" style="color: var(--primary);">Book Advising Slot</a></li>
-          <li>📝 <a href="#recommendations" style="color: var(--primary);">Letter of Recommendation Policy</a></li>
-        </ul>
-      </section>
+      </div>
+    </section>
 
-    </aside>
   </main>
 
   <!-- Footer -->
   <footer>
-    <p>&copy; 2026 HappyGamerGoose. Published via <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>.</p>
-    <p style="margin-top: 0.35rem; font-size: 0.78rem;">Built during the Nursing Faculty Web Workshop.</p>
+    <div class="container">
+      <p>&copy; 2026 HappyGamerGoose &bull; B.Tech IT, MIT Manipal</p>
+      <p class="footer-meta">
+        Built with HTML5 &amp; CSS3 &bull; Hosted with <a href="https://pages.github.com/" target="_blank" rel="noopener noreferrer">GitHub Pages</a>
+      </p>
+    </div>
   </footer>
 
 </body>
